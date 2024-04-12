@@ -1,84 +1,88 @@
-#<<<<<<< HEAD
+# Task list
+tasks = []
+deleted_tasks = []
 
-print("""Project Description: In this assignment, you will create a task manager 
-application using the Python programming language. This application 
-will allow users to add, complete, delete, and list their tasks.""")
-
-
-
-
-
-task=[]
-
+# Function to add a task
 def add_task(task_name, status="Pending"):
     if status not in ["Pending", "Completed"]:
         print("Invalid status!")
         return
     task = {
-        "Sequence Number": len(task) + 1,
+        "Sequence Number": len(tasks) + 1,
         "Task Name": task_name,
         "Status": status
     }
-    task.append(task)
+    tasks.append(task)
     print("New task added:", task_name, "- Status:", status)
+    
+# Function to mark a task as completed
+def complete_task(task_number):
+    if task_number <= len(tasks):
+        tasks[task_number - 1]["Status"] = "Completed"
+        print("Task completed:", tasks[task_number - 1]["Task Name"])
+    else:
+        print("Invalid task number")
 
-def completed_task ():
-    return
+# Function to delete a task
+def delete_task(task_number):
+    if task_number <= len(tasks):
+        deleted_task = tasks.pop(task_number - 1)
+        deleted_tasks.append(deleted_task)
+        print("Task deleted:", deleted_task["Task Name"])
+    else:
+        print("Invalid task number")
 
-def del_task ():
- 
-    return
+# Function to list all tasks
+def list_all_tasks():
+    if tasks:
+        print("All Tasks:")
+        for task in tasks:
+            print(task["Sequence Number"], "-", task["Task Name"], "-", task["Status"])
+    else:
+        print("No tasks found.")
 
-def list_completed_task():
-    return
+# Function to list deleted tasks
+def list_deleted_tasks():
+    if deleted_tasks:
+        print("Deleted Tasks:")
+        for task in deleted_tasks:
+            print(task["Sequence Number"], "-", task["Task Name"], "-", "Deleted")
+    else:
+        print("No deleted tasks found.")
 
-def statusList_task ():
-    return
+# Main loop
+while True:
+    print("\nTask Manager\n")
+    print("1. Add a new task")
+    print("2. Mark a task as completed")
+    print("3. Delete a task")
+    print("4. List all completed tasks")
+    print("5. List all tasks (including deleted ones)")
+    print("6. Exit")
 
-while True :
-    print("""
-|===========Task Manager Application======[-][o][x]
-|          T A S K   M  E  N  U                   | 
-|   1- Add Task                                   | 
-|   2- completed Task                             | 
-|   3- Delete Task                                |
-|   4- List Completed Task                        | 
-|   5- List Satatus                               | 
-|   6- Exit                                       | 
-|               version 3.02                      |       
-|           copyright@vit4 group2                 |
-|=================================================| """)
 
-    choise_task= input("Please Enter the a nummer:")
+    choice = input("Please select an action: ")
 
-    if choise_task == "1":
+    if choice == "1":
         task_name = input("Enter the name of the new task: ")
         status_input = input("Enter the status of the task 'Completed' or 'Pending' (default is 'Pending'): ").capitalize()
         if status_input:
             add_task(task_name, status_input)
         else:
             add_task(task_name)
-
-    elif choise_task == "2":
-        comp_task()
-
-    elif choise_task == "3":
-        del_task()
-    elif choise_task == "4":
-        list_completed_task()
-
-    elif statusList_task == "5":
-        comp_task()
-    
-    elif choise_task == "6":
-         break
+    elif choice == "2":
+        task_number = int(input("Enter the number of the completed task: "))
+        complete_task(task_number)
+    elif choice == "3":
+        task_number = int(input("Enter the number of the task to be deleted: "))
+        delete_task(task_number)
+    elif choice == "4":
+        list_completed_tasks()
+    elif choice == "5":
+        list_all_tasks()
+        list_deleted_tasks()  # Include deleted tasks in the list
+    elif choice == "6":
+        print("Exiting...")
+        break
     else:
-        print("Invalid option! Please try again.")
-       
-
-        
-
-
-
-    
-
+        print("Invalid action. Please try again.")
