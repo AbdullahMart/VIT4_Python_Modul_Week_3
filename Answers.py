@@ -32,6 +32,15 @@ def delete_task(task_number):
     else:
         print("Invalid task number")
 
+def list_completed_tasks():
+    completed_tasks = [task for task in tasks if task["Status"] == "Completed"]
+    if completed_tasks:
+        print("Completed Tasks:")
+        for task in completed_tasks:
+            print(task["Sequence Number"], "-", task["Task Name"])
+    else:
+        print("No completed tasks found.")
+
 # Function to list all tasks
 def list_all_tasks():
     if tasks:
@@ -80,7 +89,7 @@ while True:
         list_completed_tasks()
     elif choice == "5":
         list_all_tasks()
-        list_deleted_tasks()  # Include deleted tasks in the list
+        list_deleted_tasks() 
     elif choice == "6":
         print("Exiting...")
         break
