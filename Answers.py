@@ -6,7 +6,7 @@ will allow users to add, complete, delete, and list their tasks.""")
 
 
 
-task=[]
+tasks=[]
 
 def add_task ():
     return
@@ -18,7 +18,12 @@ def del_task ():
     return
 
 def statusList_task ():
-    return
+        if tasks:
+        print("\nAll Tasks:")
+        for i, task in enumerate(tasks, start=1):
+            print(f"{i}. {task['task_name']} - Status: {task['status']}")
+    else:
+        print("No tasks.")
 
 while True :
     print("""
@@ -48,10 +53,11 @@ while True :
         comp_task()
     
     elif choise_task == "5":
-         break
+        print("Exiting the program...")
+        break
     else:
         print("Invalid option! Please try again.")
-       
+
 
         
 
