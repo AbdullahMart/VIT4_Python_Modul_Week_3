@@ -45,7 +45,7 @@ def list_completed_tasks():
 def list_all_tasks():
     if tasks:
         print("All Tasks:")
-        for task in tasks:
+        for index, task in enumerate(tasks, start=1):
             print(task["Sequence Number"], "-", task["Task Name"], "-", task["Status"])
     else:
         print("No tasks found.")
